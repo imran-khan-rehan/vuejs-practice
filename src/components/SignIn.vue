@@ -1,48 +1,33 @@
 <template>
-    <div class="signin">
-      <h2>Sign In</h2>
-      <form @submit.prevent="handleSignIn">
-        <div>
-          <label for="email">Email:</label>
-          <input type="email" v-model="email" required />
-        </div>
-        <div>
-          <label for="password">Password:</label>
-          <input type="password" v-model="password" required />
-        </div>
-        <button type="submit">Sign In</button>
-      </form>
-      <a href="/signup" >signup</a>
-    </div>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  
-  export default {
-    data() {
-      return {
-        email: '',
-        password: ''
-      };
-    },
-    methods: {
-      async handleSignIn() {
-        try {
-          const response = await axios.post('/api/signin', {
-            email: this.email,
-            password: this.password
-          });
-          // Handle successful sign in (e.g., redirect, store token)
-        } catch (error) {
-          // Handle error (e.g., show error message)
-        }
-      }
-    }
-  };
-  </script>
-  
-  <style scoped>
-  /* Add your styles here */
-  </style>
-  
+  <div>
+    <h2>Sign In</h2>
+    <form @submit.prevent="submitForm">
+      <input v-model="email" type="email" placeholder="Email" required />
+      <input v-model="password" type="password" placeholder="Password" required />
+      <button type="submit">Sign In</button>
+    </form>
+  </div>
+</template>
+
+<script>
+import { ref } from 'vue';
+
+export default {
+  setup() {
+    const email = ref('');
+    const password = ref('');
+
+    const submitForm = () => {
+      // Handle form submission
+      console.log('Email:', email.value);
+      console.log('Password:', password.value);
+    };
+
+    return {
+      email,
+      password,
+      submitForm
+    };
+  }
+};
+</script>
